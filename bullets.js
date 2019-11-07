@@ -16,7 +16,7 @@ class Bullets {
         this.velX = 5
         this.velY = 5
     }
-    draw(angle) {
+    draw() {
         this.move()
         this.ctx.drawImage(this.image, (this.posX - 20), (this.posY - 20), this.width, this.height)
     }

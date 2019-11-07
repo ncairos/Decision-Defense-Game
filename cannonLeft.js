@@ -11,9 +11,12 @@ class Cannonleft {
         this.image3 = new Image()
         this.image3.src = "img/player1.png"
 
+
         this.width = 50
         this.height = 50
 
+        this.score = 0
+        
         this.posX = 140
         this.posY = 440
 
@@ -44,7 +47,6 @@ class Cannonleft {
         this.ctx.drawImage(this.image2, 115, 436, this.width, this.height) //BASE CAÑON
         this.ctx.drawImage(this.image3, 18, 377, 90, 110) //PLAYER1
     }
-
     move() {
         if (this.directions.right) {
             if (this.angle > 0)
@@ -56,17 +58,16 @@ class Cannonleft {
         }
         //console.log(this.angle)
         this.bullets.forEach(bullet => bullet.move())
-
     }
     setListeners() {
         document.addEventListener("keydown", e => {
             switch (e.keyCode) {
                 case 65:
-                    console.log(this.angle)
+                    // console.log(this.angle)
                     this.directions.right = true
                     break;
                 case 68:
-                    console.log(this.angle)
+                    // console.log(this.angle)
                     this.directions.left = true
                     break;
                 case 87:
@@ -92,4 +93,5 @@ class Cannonleft {
     shoot() {
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.velX, this.velY, this.angle))
     }
+
 }

@@ -14,6 +14,8 @@ class Cannonright {
         this.width = 50
         this.height = 50
 
+        this.score = 0 
+        
         this.posX = 1230
         this.posY = 440
 
