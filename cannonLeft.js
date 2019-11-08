@@ -11,7 +11,7 @@ class Cannonleft {
         this.image3 = new Image()
         this.image3.src = "img/player1.png"
 
-        this.sounds = new Audio("./music/fart_sm.mp3")
+        this.sounds = new Audio("./music/rubber.duck.wav")
 
         this.width = 50
         this.height = 50
@@ -74,6 +74,8 @@ class Cannonleft {
                 case 87:
                     // console.log("yay")
                     this.shoot()
+                    this.sounds.volume = 0.3
+                    this.sounds.play()
                     break;
             }
         })
@@ -87,7 +89,7 @@ class Cannonleft {
                     break;
                 case 87:
                     this.shoot()
-                    this.sounds.volume = 0.5
+                    this.sounds.volume = 0.3
                     this.sounds.play()
                     break;
             }

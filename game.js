@@ -10,7 +10,7 @@ const decisionGame = {
     time: undefined,
     opt1: undefined,
     opt2: undefined,
-    mainMusic: new Audio("./music/mission-impossible-theme.mp3"),
+    mainMusic: new Audio("./music/bgsoundtrack.wav"),
     keys: {
         A_KEY: 65,
         W_KEY: 87,
@@ -30,6 +30,7 @@ const decisionGame = {
         this.canvas.height = this.height
         this.canvas.width = this.width
         this.start()
+        this.mainMusic.play()
     },
     start() {
         this.reset()
@@ -44,7 +45,7 @@ const decisionGame = {
             if (this.time == 0) {
                 this.gameOver()
             }
-            this.mainMusic.play()
+
             this.isCollision(this.obstacles50, this.cannonLeft.bullets, this.cannonLeft)
             this.isCollision(this.obstacles30, this.cannonLeft.bullets, this.cannonLeft)
             this.isCollision(this.obstacles20, this.cannonLeft.bullets, this.cannonLeft)
@@ -134,27 +135,27 @@ const decisionGame = {
     clearObstacles() {
         this.obstacles50.forEach((obs, idx) => {
             if (obs.posY >= this.height) {
-                this.obstacles50.splice(idx, 1);
+                this.obstacles50.splice(idx, 1)
             }
         })
         this.obstacles30.forEach((obs, idx) => {
             if (obs.posY >= this.height) {
-                this.obstacles30.splice(idx, 1);
+                this.obstacles30.splice(idx, 1)
             }
         })
         this.obstacles20.forEach((obs, idx) => {
             if (obs.posY >= this.height) {
-                this.obstacles20.splice(idx, 1);
+                this.obstacles20.splice(idx, 1)
             }
         })
         this.obstacles10.forEach((obs, idx) => {
             if (obs.posY >= this.height) {
-                this.obstacles10.splice(idx, 1);
+                this.obstacles10.splice(idx, 1)
             }
         })
         this.obstacles5.forEach((obs, idx) => {
             if (obs.posY >= this.height) {
-                this.obstacles5.splice(idx, 1);
+                this.obstacles5.splice(idx, 1)
             }
         })
     },
@@ -193,34 +194,38 @@ const decisionGame = {
     drawScore() {
         this.scoreboard.update(this.cannonRight.score, 1155, 136)
         this.scoreboard.update(this.cannonLeft.score, 115, 136)
-        console.log(this.cannonRight.score)
-        console.log(this.cannonLeft.score)
+        // console.log(this.cannonRight.score)
+        // console.log(this.cannonLeft.score)
     },
     drawCountdown() {
         this.timer.update(this.time)
     },
     gameOver() {
         clearInterval(this.interval)
-        this.stopMusic()
         this.ctx.font = "300px vcr osd mono"
         this.ctx.fillStyle = "#99CC33"
         this.ctx.fillText(("TIMESUP!"), 0, 450)
         this.youWin()
+        this.stopMusic()
 
     },
     youWin() {
+        this.tadaSound = document.createElement("audio")
+        this.tadaSound.src = "./music/ta-da.wav"
+        this.tadaSound.volume = 0.5
+        this.tadaSound.play()
         setTimeout(() => {
             if (this.cannonLeft.score > this.cannonRight.score) {
                 alert(`PLAYER1 HA GANADO! HA LUCHADO A MUERTE POR SU OPCION ${this.opt1.toUpperCase()}`)
-                console.log(this.opt1)
+                // console.log(this.opt1)
             }
             if (this.cannonLeft.score < this.cannonRight.score) {
                 alert(`PLAYER2 HA GANADO! HA LUCHADO MUERTE POR SU OPCION ${this.opt2.toUpperCase()}`)
             }
-        }, 2000)
+        }, 1000)
     },
     musicBG() {
-        this.mainMusic.volume = 0.3
+        this.mainMusic.volume = 0.5
         this.mainMusic.loop = true
         this.mainMusic.play()
     },

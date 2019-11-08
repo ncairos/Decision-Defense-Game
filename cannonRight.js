@@ -11,6 +11,8 @@ class Cannonright {
         this.image3 = new Image()
         this.image3.src = "img/Player2.png"
 
+        this.sounds = new Audio("./music/rubber.duck.wav")
+
         this.width = 50
         this.height = 50
 
@@ -73,6 +75,8 @@ class Cannonright {
                 case 38:
                     // console.log("yay")
                     this.shoot()
+                    this.sounds.volume = 0.3
+                    this.sounds.play()
                     break;
             }
         })
@@ -87,6 +91,8 @@ class Cannonright {
                 case 38:
                     // console.log("yay")
                     this.shoot()
+                    this.sounds.volume = 0.3
+                    this.sounds.play()
                     break;
             }
         })
