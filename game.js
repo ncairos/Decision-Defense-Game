@@ -10,6 +10,7 @@ const decisionGame = {
     time: undefined,
     opt1: undefined,
     opt2: undefined,
+    mainMusic: new Audio("./music/mission-impossible-theme.mp3"),
     keys: {
         A_KEY: 65,
         W_KEY: 87,
@@ -43,6 +44,7 @@ const decisionGame = {
             if (this.time == 0) {
                 this.gameOver()
             }
+            this.mainMusic.play()
             this.isCollision(this.obstacles50, this.cannonLeft.bullets, this.cannonLeft)
             this.isCollision(this.obstacles30, this.cannonLeft.bullets, this.cannonLeft)
             this.isCollision(this.obstacles20, this.cannonLeft.bullets, this.cannonLeft)
@@ -65,7 +67,7 @@ const decisionGame = {
         this.score = 0
         this.timer = CountdownBoard
         this.timer.init(this.ctx)
-        this.time = 500 //2500
+        this.time = 500
         this.obstacles50 = []
         this.obstacles30 = []
         this.obstacles20 = []
@@ -109,19 +111,19 @@ const decisionGame = {
         let randomNum8 = Math.floor(Math.random() * (1000 - 300)) + 300
         let randomNum9 = Math.floor(Math.random() * (1000 - 300)) + 300
 
-        if (this.framesCounter % 700 == 0) {
+        if (this.framesCounter % 300 == 0) {
             this.obstacles50.push(new Enemies(this.ctx, this.width, this.height, "img/enemie2.png", randomNum, 100, 60))
             this.obstacles50.push(new Enemies(this.ctx, this.width, this.height, "img/enemie1.png", randomNum2, 60, 75))
         }
-        if (this.framesCounter % 500 == 0) {
+        if (this.framesCounter % 250 == 0) {
             this.obstacles30.push(new Enemies(this.ctx, this.width, this.height, "img/enemie3.png", randomNum3, 60, 75))
             this.obstacles30.push(new Enemies(this.ctx, this.width, this.height, "img/enemie4.png", randomNum4, 60, 75))
         }
-        if (this.framesCounter % 300 == 0) {
+        if (this.framesCounter % 200 == 0) {
             this.obstacles20.push(new Enemies(this.ctx, this.width, this.height, "img/enemie5.png", randomNum5, 75, 60))
             this.obstacles20.push(new Enemies(this.ctx, this.width, this.height, "img/enemie6.png", randomNum6, 75, 75))
         }
-        if (this.framesCounter % 200 == 0) {
+        if (this.framesCounter % 150 == 0) {
             this.obstacles10.push(new Enemies(this.ctx, this.width, this.height, "img/enemie7.png", randomNum7, 60, 75))
             this.obstacles10.push(new Enemies(this.ctx, this.width, this.height, "img/enemie8.png", randomNum8, 60, 75))
         }
@@ -181,7 +183,7 @@ const decisionGame = {
                         personaje.score += 10
                     }
                     if (obstaclesArray[i].image.src.includes("enemie9")) {
-                        personaje.score += 5
+                        personaje.score -= 5
                     }
                     obstaclesArray.splice(i, 1)
                 }
@@ -199,18 +201,30 @@ const decisionGame = {
     },
     gameOver() {
         clearInterval(this.interval)
+        this.stopMusic()
         this.ctx.font = "300px vcr osd mono"
         this.ctx.fillStyle = "#99CC33"
         this.ctx.fillText(("TIMESUP!"), 0, 450)
         this.youWin()
+
     },
     youWin() {
-        if (this.cannonLeft.score > this.cannonRight.score) {
-            alert (`PLAYER1 HA GANADO! HA LUCHADO A MUERTE POR SU OPCION ${this.opt1.toUpperCase()}`)
-            console.log(this.opt1)
-        }
-        if (this.cannonLeft.score < this.cannonRight.score) {
-            alert(`PLAYER2 HA GANADO! HA LUCHADO MUERTE POR SU OPCION ${this.opt2.toUpperCase()}`)
-        }
+        setTimeout(() => {
+            if (this.cannonLeft.score > this.cannonRight.score) {
+                alert(`PLAYER1 HA GANADO! HA LUCHADO A MUERTE POR SU OPCION ${this.opt1.toUpperCase()}`)
+                console.log(this.opt1)
+            }
+            if (this.cannonLeft.score < this.cannonRight.score) {
+                alert(`PLAYER2 HA GANADO! HA LUCHADO MUERTE POR SU OPCION ${this.opt2.toUpperCase()}`)
+            }
+        }, 2000)
+    },
+    musicBG() {
+        this.mainMusic.volume = 0.3
+        this.mainMusic.loop = true
+        this.mainMusic.play()
+    },
+    stopMusic() {
+        this.mainMusic.pause()
     }
 }
