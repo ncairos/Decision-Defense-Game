@@ -68,7 +68,7 @@ const decisionGame = {
         this.score = 0
         this.timer = CountdownBoard
         this.timer.init(this.ctx)
-        this.time = 500
+        this.time = 2500
         this.obstacles50 = []
         this.obstacles30 = []
         this.obstacles20 = []
